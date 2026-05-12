@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body data-theme="dark">
+    <script>
+        if (window.process && window.process.type === 'renderer') {
+            document.body.classList.add('electron-env');
+        }
+    </script>
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
