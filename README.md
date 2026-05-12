@@ -1,4 +1,4 @@
-# 🎨 QR Studio - macOS QR Generator
+# 🎨 QR Studio - macOS QR Code Generator
 
 ![QR Studio App Icon](build/icon.png)
 
