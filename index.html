@@ -4,17 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Studio</title>
+    <link rel="icon" type="image/png" href="build/icon.png" />
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
-    <script>
-        // Load CSS with Timestamp to prevent caching
-        (function() {
-            const t = new Date().getTime();
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'style.css?t=' + t;
-            document.head.appendChild(link);
-        })();
-    </script>
 </head>
 <body data-theme="dark">
     <script>
@@ -152,14 +144,6 @@
     </div>
 
     <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-    <script>
-        // Load renderer.js with Timestamp to prevent caching
-        (function() {
-            const t = new Date().getTime();
-            const script = document.createElement('script');
-            script.src = 'renderer.js?t=' + t;
-            document.body.appendChild(script);
-        })();
-    </script>
+    <script src="renderer.js"></script>
 </body>
 </html>
