@@ -63,7 +63,7 @@ body {
     border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 50px;
 }
 
 .sidebar-header {
