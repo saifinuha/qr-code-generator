@@ -43,27 +43,44 @@ body[data-theme="light"] .app-container {
 
 body {
     font-family: var(--font-family);
-    background-color: var(--bg-dark);
+    background-color: var(--bg-dark); /* Solid background for web */
     color: var(--text-main);
     height: 100vh;
+    margin: 0;
     overflow: hidden;
+    user-select: none;
+}
+
+/* Specific transparency for Electron to allow vibrancy */
+body.electron-env {
+    background-color: transparent !important;
 }
 
 .app-container {
     display: flex;
+    width: 100vw;
     height: 100vh;
     background: radial-gradient(circle at top right, #1a1a2e, #121212);
+    position: relative;
+    z-index: 1;
+}
+
+body[data-theme="light"] .app-container {
+    background: radial-gradient(circle at top right, #FFFFFF, #F2F2F7);
 }
 
 /* Sidebar Styling */
 .sidebar {
-    width: 240px; /* Reduced from 260px */
+    width: 240px;
+    flex-shrink: 0;
     background: var(--sidebar-bg);
     backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
     padding-top: 50px;
+    height: 100%;
 }
 
 .sidebar-header {
