@@ -138,8 +138,8 @@ function renderFields(type) {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize QR Object
     qrCode = new QRCodeStyling({
-        width: 600,
-        height: 600,
+        // width: 600,
+        // height: 600,
         type: "svg",
         data: "https://google.com",
         dotsOptions: { color: "#ffffff", type: "square" },
