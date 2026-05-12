@@ -202,7 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Setup Export
     document.getElementById('btn-export-png')?.addEventListener('click', () => {
-        qrCode.download({ name: "qr-studio-code", extension: "png" });
+        qrCode.download({ 
+            name: "qr-studio-code", 
+            extension: "png",
+            width: 1000,
+            height: 1000
+        });
     });
 
     // 6. Setup Theme
