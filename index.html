@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body data-theme="dark">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box">
+                    <i class="ri-qr-code-line"></i>
+                    <div class="logo-text">
+                        <span class="brand">QR CODE</span>
+                        <span class="sub-brand">STUDIO</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-item active" data-type="url">
+                    <i class="ri-link"></i>
+                    <span>Link</span>
+                </button>
+                <button class="nav-item" data-type="text">
+                    <i class="ri-edit-line"></i>
+                    <span>Text</span>
+                </button>
+                <button class="nav-item" data-type="wifi">
+                    <i class="ri-wifi-line"></i>
+                    <span>WiFi</span>
+                </button>
+                <button class="nav-item" data-type="vcard">
+                    <i class="ri-user-line"></i>
+                    <span>vCard</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-item settings-btn" id="theme-toggle">
+                    <i class="ri-moon-line"></i>
+                    <span>Theme</span>
+                </button>
+                <div class="author-info">
+                    <span>Made with <i class="ri-heart-3-line"></i> by saifinuha</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <header class="content-header">
+                    <h1 id="current-type-title">LINK</h1>
+                    <p id="current-type-subtitle">Generate QR for URL</p>
+                </header>
+
+                <div class="split-view">
+                    <!-- Editor Area -->
+                    <section class="editor-section">
+                        <div class="input-container" id="input-fields">
+                            <!-- Dynamic fields -->
+                        </div>
+
+                        <div class="style-options">
+                            <div class="option-group">
+                                <label>Style</label>
+                                <div class="segmented-control" id="dot-style-selector">
+                                    <button class="segment active" data-value="square">Classic</button>
+                                    <button class="segment" data-value="rounded">Rounded</button>
+                                    <button class="segment" data-value="dots">Dot</button>
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <label>Color</label>
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="dots-color" value="#ffffff">
+                                    <div class="color-preview-gradient"></div>
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <label>Corners</label>
+                                <div class="slider-container">
+                                    <div class="slider-info">
+                                        <span>Rounded radius</span>
+                                        <span id="corner-radius-val">75%</span>
+                                    </div>
+                                    <input type="range" id="corner-radius-slider" min="0" max="100" value="75">
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <label>Logo</label>
+                                <div class="logo-actions">
+                                    <button class="btn secondary upload-btn" id="logo-trigger">
+                                        Upload Logo
+                                    </button>
+                                    <div class="logo-preview-box" id="logo-preview">
+                                    </div>
+                                    <button class="btn icon-btn reset-btn" id="logo-reset" title="Remove Logo">
+                                        <i class="ri-delete-bin-line"></i>
+                                    </button>
+                                    <input type="file" id="logo-input" accept="image/*" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Preview Area -->
+                    <section class="preview-section">
+                        <div class="qr-container">
+                            <div id="qr-preview"></div>
+                        </div>
+                        <p class="scan-hint">Scan to Test</p>
+                        
+                        <div class="footer-actions">
+                            <p class="download-label">Download QR Code</p>
+                            <div class="button-group">
+                                <button id="btn-export-png" class="btn primary main-action">
+                                    Save QR
+                                </button>
+                                <button class="btn icon-btn" title="Share">
+                                    <i class="ri-share-line"></i>
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="node_modules/qr-code-styling/lib/qr-code-styling.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>
