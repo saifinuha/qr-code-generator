@@ -241,26 +241,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Setup Theme
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle?.addEventListener('click', () => {
-        const body = document.body;
-        const isDark = body.getAttribute('data-theme') === 'dark';
-        const newTheme = isDark ? 'light' : 'dark';
-        body.setAttribute('data-theme', newTheme);
-        
-        const icon = themeToggle.querySelector('i');
-        if (icon) {
-            icon.className = newTheme === 'dark' ? 'ri-moon-line' : 'ri-sun-line';
-        }
+    const themeToggles = [
+        document.getElementById('theme-toggle'),
+        document.getElementById('theme-toggle-mobile')
+    ];
 
-        const dotsColorInput = document.getElementById('dots-color');
-        if (dotsColorInput && (dotsColorInput.value === '#ffffff' || dotsColorInput.value === '#000000')) {
-            dotsColorInput.value = isDark ? '#000000' : '#ffffff';
-            updateQR();
+    themeToggles.forEach(toggle => {
+        toggle?.addEventListener('click', () => {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            const newTheme = isDark ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            
+            // Update all icons
+            themeToggles.forEach(btn => {
+                const icon = btn?.querySelector('i');
+                if (icon) {
+                    icon.className = newTheme === 'dark' ? 'ri-moon-line' : 'ri-sun-line';
+                }
+            });
+
+            const dotsColorInput = document.getElementById('dots-color');
+            if (dotsColorInput && (dotsColorInput.value === '#ffffff' || dotsColorInput.value === '#000000')) {
+                dotsColorInput.value = isDark ? '#000000' : '#ffffff';
+                updateQR();
+            }
+        });
+    });
+
+    // 7. Setup Sidebar Collapse
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    
+    // Load saved state
+    const isCollapsed = localStorage.getItem('sidebar-collapsed') === 'true';
+    if (isCollapsed && sidebar) {
+        sidebar.classList.add('collapsed');
+    }
+
+    sidebarToggle?.addEventListener('click', () => {
+        if (sidebar) {
+            const nowCollapsed = sidebar.classList.toggle('collapsed');
+            localStorage.setItem('sidebar-collapsed', nowCollapsed);
         }
     });
 
-    // 7. Initial Render
+    // 8. Initial Render
     renderFields('url');
     updateQR();
 });

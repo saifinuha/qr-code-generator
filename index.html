@@ -51,6 +51,10 @@
             </nav>
 
             <div class="sidebar-footer">
+                <button class="nav-item collapse-btn" id="sidebar-toggle" title="Toggle Sidebar">
+                    <i class="ri-side-bar-line"></i>
+                    <span>Collapse</span>
+                </button>
                 <button class="nav-item settings-btn" id="theme-toggle">
                     <i class="ri-moon-line"></i>
                     <span>Theme</span>
@@ -63,6 +67,17 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Mobile Header (Visible only on small screens) -->
+            <div class="mobile-top-bar">
+                <div class="mobile-logo">
+                    <i class="ri-qr-code-line"></i>
+                    <span>QR STUDIO</span>
+                </div>
+                <button class="theme-toggle-mobile" id="theme-toggle-mobile">
+                    <i class="ri-moon-line"></i>
+                </button>
+            </div>
+
             <div class="content-wrapper">
                 <header class="content-header">
                     <h1 id="current-type-title">LINK</h1>
