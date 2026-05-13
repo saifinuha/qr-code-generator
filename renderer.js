@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     qrCode = new QRCodeStyling({
         width: 800,
         height: 800,
-        type: "svg",
+        type: "canvas",
         data: "https://google.com",
         dotsOptions: { 
             color: "#ffffff", 
