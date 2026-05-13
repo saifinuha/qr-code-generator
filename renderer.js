@@ -83,16 +83,31 @@ function updateQR() {
 
         qrCode.update({
             data: formattedData || " ",
-            dotsOptions: { color: dotsColor, type: dotType },
+            dotsOptions: { 
+                color: dotsColor, 
+                type: dotType 
+            },
             cornersSquareOptions: {
-                type: cornerRadius > 50 ? "extra-rounded" : (cornerRadius > 10 ? "rounded" : "square"),
+                type: cornerRadius > 60 ? "extra-rounded" : (cornerRadius > 20 ? "rounded" : "square"),
                 color: dotsColor
             },
-            cornersDotOptions: { color: dotsColor }
+            cornersDotOptions: { 
+                type: cornerRadius > 40 ? "dot" : "square",
+                color: dotsColor 
+            }
         });
 
         const radiusValEl = document.getElementById('corner-radius-val');
         if (radiusValEl) radiusValEl.innerText = cornerRadius + '%';
+        
+        // Add a subtle "ping" animation to the preview
+        const preview = document.getElementById('qr-preview');
+        if (preview) {
+            preview.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                preview.style.transform = 'scale(1)';
+            }, 100);
+        }
     } catch (err) {
         console.error("QR Update Error:", err);
     }
@@ -138,15 +153,30 @@ function renderFields(type) {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize QR Object
     qrCode = new QRCodeStyling({
-        width: 600,
-        height: 600,
+        width: 800,
+        height: 800,
         type: "svg",
         data: "https://google.com",
-        dotsOptions: { color: "#ffffff", type: "square" },
-        backgroundOptions: { color: "transparent" },
-        cornersSquareOptions: { type: "extra-rounded", color: "#ffffff" },
-        cornersDotOptions: { type: "dot", color: "#ffffff" },
-        imageOptions: { crossOrigin: "anonymous", margin: 10, imageSize: 0.4 }
+        dotsOptions: { 
+            color: "#ffffff", 
+            type: "square" 
+        },
+        backgroundOptions: { 
+            color: "transparent" 
+        },
+        cornersSquareOptions: { 
+            type: "extra-rounded", 
+            color: "#ffffff" 
+        },
+        cornersDotOptions: { 
+            type: "dot", 
+            color: "#ffffff" 
+        },
+        imageOptions: { 
+            crossOrigin: "anonymous", 
+            margin: 15, 
+            imageSize: 0.4 
+        }
     });
 
     const previewElement = document.getElementById("qr-preview");
