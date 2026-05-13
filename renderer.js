@@ -138,9 +138,9 @@ function renderFields(type) {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize QR Object
     qrCode = new QRCodeStyling({
-        // width: 600,
-        // height: 600,
-        type: "svg",
+        width: 600,
+        height: 600,
+        type: "canvas",
         data: "https://google.com",
         dotsOptions: { color: "#ffffff", type: "square" },
         backgroundOptions: { color: "transparent" },
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoReset?.addEventListener('click', () => {
         qrCode.update({ image: "" });
-        if (logoPreview) logoPreview.innerHTML = `<span>CS</span>`;
+        if (logoPreview) logoPreview.innerHTML = ``;
         if (logoInput) logoInput.value = "";
     });
 
