@@ -4,7 +4,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --mac",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "web": "npx serve ./",
     "dist": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,26 +37,55 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
-    "dmg": {
-      "contents": [
-        {
-          "x": 130,
-          "y": 220
+    "win": {
+      "target": [
+        {"target":"nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
+        {"target":"zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
-      ]
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "linux": {
+      "target": [
+        {"target":"AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {"target":"deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "category": "Office"
     },
     "directories": {
       "output": "dist"
     }
   },
   "keywords": [],
-  "author": "saifinuha",
+  "author": {
+    "name": "saifinuha",
+    "email": "79562533+saifinuha@users.noreply.github.com"
+  },
   "license": "ISC",
   "description": "QR Studio is a free and open-source desktop application for generating high-quality QR codes.",
   "devDependencies": {

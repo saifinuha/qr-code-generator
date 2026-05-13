@@ -1,56 +1,83 @@
-# 🎨 QR Studio - macOS QR Code Generator
+# 🎨 QR Studio — Professional QR Code Generator
 
 ![QR Studio App Icon](build/icon.png)
 
-**QR Studio** adalah aplikasi macOS native yang elegan dan minimalis untuk membuat serta mengkustomisasi QR Code dengan gaya *glassmorphism* yang premium. Dibangun menggunakan Electron dan Vanilla JS untuk performa yang ringan dan tampilan yang selaras dengan macOS.
+**QR Studio** adalah aplikasi pembuat QR Code premium yang tersedia untuk Desktop (**macOS, Windows, Linux**) dan **Web**. Dibangun dengan estetika *Glassmorphism* modern, aplikasi ini memungkinkan Anda membuat QR Code yang cantik dan profesional dalam hitungan detik.
+
+### 🌐 Live Demo
+Aplikasi ini dapat diakses langsung via browser di:
+**[https://saifinuha.github.io/qr-code-generator/](https://saifinuha.github.io/qr-code-generator/)**
+
+---
 
 ## ✨ Fitur Utama
 
 - 🔗 **Multiple Data Types**: Dukungan untuk Link (URL), Plain Text, WiFi Network, dan vCard (Contact).
 - 🎨 **Deep Customization**: 
-  - Ubah gaya titik (Classic, Rounded, Dot).
-  - Kustomisasi warna QR Code secara real-time.
-  - Atur kelengkungan sudut (*corner radius*) dengan slider.
-- 🖼️ **Logo Integration**: Unggah logo kustom Anda ke tengah QR Code.
-- 🌓 **Adaptive Themes**: Dukungan penuh untuk Dark Mode dan Light Mode.
-- 💾 **High-Quality Export**: Simpan hasil akhir dalam format PNG berkualitas tinggi.
--  **Native macOS Feel**: Efek *vibrancy* jendela, kontrol jendela tersembunyi, dan ikon aplikasi premium.
+  - **Pattern Style**: Ubah gaya pola utama (Square, Rounded, Dot).
+  - **Advanced Corners**: Atur gaya bingkai luar (*Outer*) dan titik dalam (*Inner*) secara terpisah.
+  - **Dual Color System**: Kustomisasi warna pola utama dan warna pojok secara independen.
+- 🖼️ **Logo Integration**: Unggah logo kustom Anda ke tengah QR Code untuk branding yang kuat.
+- 📱 **Fully Responsive**: Antarmuka adaptif untuk Desktop, Tablet, dan Mobile.
+- 🌓 **Adaptive Themes**: Sinkronisasi tema Dark/Light Mode yang cerdas.
+- 🚀 **Platform Optimized**: Fitur eksklusif tambahan saat dijalankan di versi Desktop (Electron).
+
+---
 
 ## 🚀 Cara Menjalankan (Development)
 
-Jika Anda ingin menjalankan proyek ini secara lokal, pastikan Anda sudah menginstal [Node.js](https://nodejs.org/).
+Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/).
 
-1. Clone repositori ini:
+1. **Clone & Install**:
    ```bash
    git clone https://github.com/saifinuha/qr-studio.git
    cd qr-studio
-   ```
-
-2. Instal dependensi:
-   ```bash
    npm install
    ```
 
-3. Jalankan aplikasi:
+2. **Jalankan via Desktop (Electron)**:
    ```bash
    npm start
    ```
 
-## 📦 Cara Build (Produksi)
+3. **Jalankan via Browser (Web)**:
+   ```bash
+   npm run web
+   ```
 
-Untuk membuat file `.dmg` atau `.app` secara native di macOS:
+---
 
+## 📦 Build & Distribusi
+
+Aplikasi ini mendukung build multi-arsitektur (**Intel x64** & **Apple Silicon/ARM64**) untuk semua platform:
+
+### 🍎 macOS
 ```bash
-npm run build
+npm run build:mac
 ```
-Hasil build akan tersedia di folder `/dist`.
+
+### 🪟 Windows
+```bash
+npm run build:win
+```
+
+### 🐧 Linux
+```bash
+npm run build:linux
+```
+
+Hasil kompilasi akan tersedia di folder `/dist`.
+
+---
 
 ## 🛠️ Teknologi yang Digunakan
 
-- **Electron**: Framework utama aplikasi desktop.
-- **qr-code-styling**: Library inti generator QR Code.
+- **Electron**: Untuk pengalaman desktop native lintas platform.
+- **qr-code-styling**: Library inti generator QR Code berkualitas tinggi.
 - **Remix Icon**: Set ikon yang elegan dan konsisten.
-- **CSS Vanilla**: Desain kustom dengan efek Glassmorphism.
+- **CSS3 & HTML5**: Desain kustom premium dengan Glassmorphism dan sistem tema dinamis.
+
+---
 
 ## ☕ Author
 

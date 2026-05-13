@@ -102,21 +102,38 @@
                             </div>
 
                             <div class="option-group">
-                                <label>Color</label>
-                                <div class="color-picker-wrapper">
+                                <label>Main Color</label>
+                                <div class="color-picker-wrapper" id="dots-color-wrapper">
                                     <input type="color" id="dots-color" value="#ffffff">
                                     <div class="color-preview-gradient"></div>
                                 </div>
                             </div>
 
                             <div class="option-group">
-                                <label>Corners</label>
-                                <div class="slider-container">
-                                    <div class="slider-info">
-                                        <span>Rounded radius</span>
-                                        <span id="corner-radius-val">75%</span>
-                                    </div>
-                                    <input type="range" id="corner-radius-slider" min="0" max="100" value="75">
+                                <label>Corner Color</label>
+                                <div class="color-picker-wrapper" id="corners-color-wrapper">
+                                    <input type="color" id="corners-color" value="#ffffff">
+                                    <div class="color-preview-gradient"></div>
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <label>Outer Corners</label>
+                                <div class="segmented-control" id="corner-square-selector">
+                                    <button class="segment active" data-value="square">Square</button>
+                                    <button class="segment electron-only" data-value="rounded">Rounded</button>
+                                    <button class="segment" data-value="extra-rounded">Extra Rounded</button>
+                                    <button class="segment" data-value="dot">Circle</button>
+                                </div>
+                            </div>
+
+                            <div class="option-group">
+                                <label>Inner Corners</label>
+                                <div class="segmented-control" id="corner-dot-selector">
+                                    <button class="segment" data-value="square">Square</button>
+                                    <button class="segment electron-only" data-value="rounded">Rounded</button>
+                                    <button class="segment electron-only" data-value="extra-rounded">Extra</button>
+                                    <button class="segment active" data-value="dot">Dot</button>
                                 </div>
                             </div>
 
@@ -162,7 +179,7 @@
         </main>
     </div>
 
-    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
     <script src="renderer.js"></script>
 </body>
 </html>

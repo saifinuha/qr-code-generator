@@ -60,26 +60,31 @@ function updateQR() {
         });
 
         const formattedData = config.format(data);
-        const dotsColorEl = document.getElementById('dots-color');
-        const dotsColor = dotsColorEl?.value || "#ffffff";
+        const dotsColor = document.getElementById('dots-color')?.value || "#ffffff";
+        const cornersColor = document.getElementById('corners-color')?.value || "#ffffff";
         
-        // Update Color Picker UI
-        const colorPreview = document.querySelector('.color-preview-gradient');
-        const colorWrapper = document.querySelector('.color-picker-wrapper');
-        if (colorPreview && colorWrapper) {
-            colorWrapper.style.background = dotsColor;
-            colorPreview.innerText = dotsColor.toUpperCase();
-            
-            // Contrast check
-            const r = parseInt(dotsColor.slice(1,3), 16) || 0;
-            const g = parseInt(dotsColor.slice(3,5), 16) || 0;
-            const b = parseInt(dotsColor.slice(5,7), 16) || 0;
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-            colorPreview.style.color = brightness > 128 ? '#000000' : '#ffffff';
-        }
-        const activeSegment = document.querySelector('.segment.active');
-        const dotType = activeSegment?.getAttribute('data-value') || "square";
-        const cornerRadius = document.getElementById('corner-radius-slider')?.value || 75;
+        // Helper to update color picker UI
+        const updatePickerUI = (id, color) => {
+            const wrapper = document.getElementById(`${id}-color-wrapper`);
+            const preview = wrapper?.querySelector('.color-preview-gradient');
+            if (wrapper && preview) {
+                wrapper.style.backgroundColor = color;
+                preview.innerText = color.toUpperCase();
+                
+                // Contrast check
+                const r = parseInt(color.slice(1,3), 16) || 0;
+                const g = parseInt(color.slice(3,5), 16) || 0;
+                const b = parseInt(color.slice(5,7), 16) || 0;
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                preview.style.color = brightness > 128 ? '#000000' : '#ffffff';
+            }
+        };
+
+        updatePickerUI('dots', dotsColor);
+        updatePickerUI('corners', cornersColor);
+        const dotType = document.querySelector('#dot-style-selector .segment.active')?.getAttribute('data-value') || "square";
+        const squareStyle = document.querySelector('#corner-square-selector .segment.active')?.getAttribute('data-value') || "extra-rounded";
+        const dotStyle = document.querySelector('#corner-dot-selector .segment.active')?.getAttribute('data-value') || "dot";
 
         qrCode.update({
             data: formattedData || " ",
@@ -88,17 +93,14 @@ function updateQR() {
                 type: dotType 
             },
             cornersSquareOptions: {
-                type: cornerRadius > 60 ? "extra-rounded" : (cornerRadius > 20 ? "rounded" : "square"),
-                color: dotsColor
+                type: squareStyle,
+                color: cornersColor
             },
             cornersDotOptions: { 
-                type: cornerRadius > 40 ? "dot" : "square",
-                color: dotsColor 
+                type: dotStyle,
+                color: cornersColor 
             }
         });
-
-        const radiusValEl = document.getElementById('corner-radius-val');
-        if (radiusValEl) radiusValEl.innerText = cornerRadius + '%';
         
         // Add a subtle "ping" animation to the preview
         const preview = document.getElementById('qr-preview');
@@ -182,7 +184,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewElement = document.getElementById("qr-preview");
     if (previewElement) qrCode.append(previewElement);
 
-    // 2. Setup Nav
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    // Sync theme icons
+    const themeIcons = document.querySelectorAll('#theme-toggle i, #theme-toggle-mobile i');
+    themeIcons.forEach(icon => {
+        icon.className = savedTheme === 'dark' ? 'ri-moon-line' : 'ri-sun-line';
+    });
+
+    // Set initial colors based on theme if not customized
+    const dotsColorInput = document.getElementById('dots-color');
+    const cornersColorInput = document.getElementById('corners-color');
+    if (savedTheme === 'light') {
+        if (dotsColorInput) dotsColorInput.value = '#000000';
+        if (cornersColorInput) cornersColorInput.value = '#000000';
+    }
     document.querySelectorAll('.nav-item[data-type]').forEach(item => {
         item.addEventListener('click', () => {
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -193,17 +211,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Setup Style Controls
-    document.getElementById('dot-style-selector')?.addEventListener('click', (e) => {
-        if (e.target.classList.contains('segment')) {
-            document.querySelectorAll('.segment').forEach(s => s.classList.remove('active'));
-            e.target.classList.add('active');
-            updateQR();
-        }
+    document.querySelectorAll('.segmented-control').forEach(control => {
+        control.addEventListener('click', (e) => {
+            if (e.target.classList.contains('segment')) {
+                control.querySelectorAll('.segment').forEach(s => s.classList.remove('active'));
+                e.target.classList.add('active');
+                updateQR();
+            }
+        });
     });
 
     document.getElementById('dots-color')?.addEventListener('input', updateQR);
-    document.getElementById('corner-radius-slider')?.addEventListener('input', updateQR);
+    document.getElementById('corners-color')?.addEventListener('input', updateQR);
 
     // 4. Setup Logo
     const logoInput = document.getElementById('logo-input');
@@ -252,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDark = body.getAttribute('data-theme') === 'dark';
             const newTheme = isDark ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
             
             // Update all icons
             themeToggles.forEach(btn => {
@@ -262,10 +282,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const dotsColorInput = document.getElementById('dots-color');
+            const cornersColorInput = document.getElementById('corners-color');
+            let needsUpdate = false;
+
             if (dotsColorInput && (dotsColorInput.value === '#ffffff' || dotsColorInput.value === '#000000')) {
-                dotsColorInput.value = isDark ? '#000000' : '#ffffff';
-                updateQR();
+                dotsColorInput.value = newTheme === 'dark' ? '#ffffff' : '#000000';
+                needsUpdate = true;
             }
+            if (cornersColorInput && (cornersColorInput.value === '#ffffff' || cornersColorInput.value === '#000000')) {
+                cornersColorInput.value = newTheme === 'dark' ? '#ffffff' : '#000000';
+                needsUpdate = true;
+            }
+            
+            if (needsUpdate) updateQR();
         });
     });
 
